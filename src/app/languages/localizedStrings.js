@@ -48,7 +48,6 @@ export const strings = new LocalizedStrings({
     screenshareEntireScreen: "Share Entire Screen",
     screenshareAWindow: "Share a Window",
     screenshareOption: "Share Options",
-    screenshareFailed: "Unable to share your screen. If you have any issues with screensharing, please read the article",
     settings: "Settings",
     open: "Open",
     close: "Close",

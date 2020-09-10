@@ -875,8 +875,9 @@ export class Actions {
           } else if (err) {
             dispatch(
               OnBoardingMessageWithActionActions.onBoardingMessageWithAction(
-                strings.screenshareFailed,
-                'https://docs.mastermind.com/en/articles/4292182-troubleshooting-screensharing-failed'
+                err.message,
+                null,
+                true
               )
             );
           }
