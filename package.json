@@ -10,19 +10,24 @@
     "get-version": "echo $npm_package_version"
   },
   "keywords": [],
-  "author": "Voxeet",
+  "author": "Voxeet/Mastermind",
   "contributors": [
     "BEHUET Jérôme <jbehuet@gmail.com>",
     "GOURGUES Thomas <tgourgues@voxeet.com>",
     "MARTIN Valentin <vmartin@voxeet.com>"
   ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mastermind-com/voxeet-uxkit-react.git"
+  },
   "browserslist": [
     "IE 11"
   ],
   "dependencies": {
-    "@voxeet/voxeet-web-sdk": "2.3.0",
     "@babel/polyfill": "^7.2.5",
     "@babel/runtime": "^7.3.4",
+    "@voxeet/react-redux-5.1.1": "5.1.1",
+    "@voxeet/voxeet-web-sdk": "2.3.0",
     "autolinker": "^2.2.2",
     "bowser": "1.9.4",
     "browserslist": "^4.5.2",
@@ -37,7 +42,6 @@
     "react-draggable": "3.1.1",
     "react-localization": "^1.0.13",
     "react-player": "^1.11.1",
-    "@voxeet/react-redux-5.1.1": "5.1.1",
     "react-router-dom": "^4.3.1",
     "react-tooltip": "3.9.2",
     "redux": "4.0.4",
