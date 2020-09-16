@@ -5,6 +5,7 @@ import AudioMute from "../../static/sounds/voxeet_Enter_Mute.mp3";
 import CallRecorded from "../../static/sounds/call-recorded.mp3";
 
 const defaultState = {
+  isLive: false,
   isWidgetOpened: false,
   isWidgetFullScreenOn: false,
   isMuted: false,
@@ -209,6 +210,12 @@ const ControlsReducer = (state = defaultState, action) => {
         ...state,
         displayModal: !currentStatus
       };
+    }
+    case Types.GO_LIVE: {
+      return {
+        ...state,
+        isLive: true
+      }
     }
     case Types.TOGGLE_RECORDING: {
       const currentStatus = state.isRecording;

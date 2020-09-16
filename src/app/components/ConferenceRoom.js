@@ -108,6 +108,7 @@ class ConferenceRoom extends Component {
       invitedUsers,
       refreshTokenCallback,
       isListener,
+      goLiveCallback,
     } = this.props;
     let initialized = null;
     var pinCodeTmp = pinCode;
@@ -303,7 +304,9 @@ class ConferenceRoom extends Component {
       attendeesWaiting,
       isWebinar,
       isAdmin,
+      isLive,
       logo,
+      goLiveCallback,
     } = this.props;
     const {
       screenShareEnabled,
@@ -398,6 +401,7 @@ class ConferenceRoom extends Component {
           isJoined={isJoined}
           conferencePincode={conferencePincode}
           isAdmin={isAdmin}
+          isLive={isLive}
           isDemo={isDemo}
           isModal={isModal}
           isWebinar={isWebinar}
@@ -410,6 +414,7 @@ class ConferenceRoom extends Component {
           handleOnLeave={handleOnLeave}
           conferenceId={conferenceId}
           attendeesWaiting={attendeesWaiting}
+          goLiveCallback={goLiveCallback}
         />
       );
     }
@@ -434,6 +439,7 @@ ConferenceRoom.propTypes = {
   shareActions: PropTypes.array,
   isWidget: PropTypes.bool,
   isAdmin: PropTypes.bool,
+  isLive: PropTypes.bool,
   ttl: PropTypes.number,
   simulcast: PropTypes.bool,
   rtcpmode: PropTypes.string,
@@ -464,10 +470,12 @@ ConferenceRoom.propTypes = {
   customLocalizedStrings: PropTypes.object,
   handleOnConnect: PropTypes.func,
   attendeesWaiting: PropTypes.func,
+  goLiveCallback: PropTypes.func,
 };
 
 ConferenceRoom.defaultProps = {
   isWidget: true,
+  isLive: false,
   kickOnHangUp: false,
   autoHls: false,
   autoRecording: false,
@@ -514,6 +522,7 @@ ConferenceRoom.defaultProps = {
   attendeesChat: AttendeesChat,
   loadingScreen: LoadingScreen,
   attendeesWaiting: AttendeesWaiting,
+  goLiveCallback: () => {},
 };
 
 export default ConferenceRoom;

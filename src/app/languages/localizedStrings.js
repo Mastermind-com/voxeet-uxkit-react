@@ -41,6 +41,8 @@ export const strings = new LocalizedStrings({
     pinCodeExplanations:
       "Call this number below and provide the conference pin code to join the conference via PSTN.",
     record: "Record",
+    recording: "Recording",
+    go_live: "Go Live",
     shareAlreadyStarted:
       "Someone is already sharing. Please stop it before start a new one.",
     share: "Share",

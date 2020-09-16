@@ -954,6 +954,12 @@ export class Actions {
     };
   }
 
+  static goLive() {
+    return (dispatch) => {
+      dispatch(ControlsActions.goLive());
+    }
+  }
+
   static toggleRecording(conferenceId, isRecording) {
     return (dispatch) => {
       if (!isRecording) {

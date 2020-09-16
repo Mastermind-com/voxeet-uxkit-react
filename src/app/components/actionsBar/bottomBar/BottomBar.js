@@ -54,6 +54,7 @@ BottomBar.propTypes = {
   displayModal: PropTypes.bool.isRequired,
   recordingLocked: PropTypes.bool.isRequired,
   isRecording: PropTypes.bool.isRequired,
+  isLive: PropTypes.bool.isRequired,
   isWidgetOpened: PropTypes.bool.isRequired,
   isWidgetFullScreenOn: PropTypes.bool.isRequired,
   toggleWidget: PropTypes.func.isRequired,

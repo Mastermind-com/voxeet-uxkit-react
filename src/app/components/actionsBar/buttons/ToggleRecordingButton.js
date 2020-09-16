@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import ReactTooltip from "react-tooltip";
 import { strings } from "../../../languages/localizedStrings";
-import RecordingOn from "../../../../static/images/icons/btn-record-on.svg";
-import RecordingOff from "../../../../static/images/icons/btn-record-off.svg";
+import RecordingOn from "../../../../static/images/icons/btn-record-recording.svg";
+import RecordingOff from "../../../../static/images/icons/btn-record-live.svg";
 
 class ToggleRecordingButton extends Component {
   constructor(props) {
@@ -16,13 +16,21 @@ class ToggleRecordingButton extends Component {
     };
   }
 
+  statusMessage() {
+    return this.props.isRecording ?
+        strings.recording
+        :
+        strings.record
+  }
+
   render() {
     const {
       isRecording,
       toggle,
       tooltipPlace,
       isBottomBar,
-      recordingLocked
+      recordingLocked,
+      recordingTime
     } = this.props;
     const { hover, isMobile } = this.state;
     return (
@@ -50,9 +58,11 @@ class ToggleRecordingButton extends Component {
             }
           />
           {isBottomBar && (
-            <div>
-              <span>{strings.record}</span>
-            </div>
+            <>
+              <div>
+                <span>{this.statusMessage()}</span>
+              </div>
+            </>
           )}
         </a>
         {!isBottomBar && (
@@ -62,7 +72,7 @@ class ToggleRecordingButton extends Component {
             effect="solid"
             className="tooltip"
           >
-            {strings.record}
+            {this.statusMessage()}
           </ReactTooltip>
         )}
       </li>
@@ -75,7 +85,8 @@ ToggleRecordingButton.propTypes = {
   recordingLocked: PropTypes.bool.isRequired,
   toggle: PropTypes.func.isRequired,
   tooltipPlace: PropTypes.string.isRequired,
-  isBottomBar: PropTypes.bool.isRequired
+  isBottomBar: PropTypes.bool.isRequired,
+  recordingTime: PropTypes.number,
 };
 
 ToggleRecordingButton.defaultProps = {

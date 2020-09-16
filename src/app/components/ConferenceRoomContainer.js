@@ -40,6 +40,7 @@ class ConferenceRoomContainer extends Component {
     this.toggleFullScreen = this.toggleFullScreen.bind(this);
     this.toggleMicrophone = this.toggleMicrophone.bind(this);
     this.toggleRecording = this.toggleRecording.bind(this);
+    this.goLive = this.goLive.bind(this);
     this.toggleScreenShare = this.toggleScreenShare.bind(this);
     this.toggleVideoPresentation = this.toggleVideoPresentation.bind(this);
     this.convertFilePresentation = this.convertFilePresentation.bind(this);
@@ -93,9 +94,10 @@ class ConferenceRoomContainer extends Component {
   }
 
   toggleRecording() {
-    const { isRecording, recordingLocked } = this.props.controlsStore;
+    const { isRecording, recordingLocked, isLive } = this.props.controlsStore;
     const { currentUser } = this.props.participantsStore;
     const { conferenceId } = this.props;
+
     if (!recordingLocked) {
       this.props.dispatch(
         ConferenceActions.toggleRecording(conferenceId, isRecording)
@@ -115,6 +117,12 @@ class ConferenceRoomContainer extends Component {
         )
       );
     }
+  }
+
+  goLive() {
+    const { isLive } = this.props.controlsStore;
+    this.props.dispatch(ConferenceActions.goLive());
+    this.props.goLiveCallback();
   }
 
   toggleVideo() {
@@ -216,7 +224,8 @@ class ConferenceRoomContainer extends Component {
       attendeesWaiting,
       isDemo,
       conferencePincode,
-      conferenceId
+      conferenceId,
+      goLiveCallback,
     } = this.props;
     const { errorMessage, isError } = this.props.errorStore;
     const { isModalExternalLiveOpen } = this.state;
@@ -228,6 +237,7 @@ class ConferenceRoomContainer extends Component {
       isWidgetOpened,
       isWidgetFullScreenOn,
       isMuted,
+      isLive,
       isRecording,
       modalOpened,
       displayModal,
@@ -287,9 +297,11 @@ class ConferenceRoomContainer extends Component {
               audio3DEnabled={audio3DEnabled}
               displayModal={displayModal}
               isRecording={isRecording}
+              isLive={isLive}
               isFilePresentation={isFilePresentation}
               toggleMicrophone={this.toggleMicrophone}
               toggleRecording={this.toggleRecording}
+              goLive={this.goLive}
               toggleScreenShare={this.toggleScreenShare}
               toggleVideoPresentation={this.toggleVideoPresentation}
               toggleAttendeesList={this.toggleAttendeesList}
@@ -360,8 +372,10 @@ class ConferenceRoomContainer extends Component {
               audio3DEnabled={audio3DEnabled}
               displayModal={displayModal}
               isRecording={isRecording}
+              isLive={isLive}
               toggleMicrophone={this.toggleMicrophone}
               toggleRecording={this.toggleRecording}
+              goLive={this.goLive}
               toggleScreenShare={this.toggleScreenShare}
               toggleVideoPresentation={this.toggleVideoPresentation}
               convertFilePresentation={this.convertFilePresentation}
@@ -409,7 +423,8 @@ ConferenceRoomContainer.propTypes = {
   conferencePincode: PropTypes.string,
   attendeesList: PropTypes.func,
   attendeesChat: PropTypes.func,
-  attendeesWaiting: PropTypes.func
+  attendeesWaiting: PropTypes.func,
+  goLiveCallback: PropTypes.func,
 };
 
 export default ConferenceRoomContainer;
