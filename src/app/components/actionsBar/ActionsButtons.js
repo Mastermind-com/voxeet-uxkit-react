@@ -75,6 +75,7 @@ class ActionsButtons extends Component {
     return (
       <div>
         <ul className="controls-left">
+          <span class='media-buttons'>
           {!isWidgetFullScreenOn &&
             !forceFullscreen &&
             (!isWebinar || (isWebinar && isAdmin)) &&
@@ -99,6 +100,7 @@ class ActionsButtons extends Component {
                 tooltipPlace={isBottomBar ? "top" : "right"}
               />
             )}
+          </span>
         </ul>
         <ul className="controls-center">
           {!isWidgetFullScreenOn &&
@@ -108,6 +110,8 @@ class ActionsButtons extends Component {
             !isDemo && !isLive && (
               <GoLiveButton
                 goLive={goLive}
+                videoEnabled={videoEnabled}
+                isMuted={isMuted}
                 isBottomBar={isBottomBar}
                 tooltipPlace={isBottomBar ? "top" : "right"}
               />

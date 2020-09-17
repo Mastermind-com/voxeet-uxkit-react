@@ -3,10 +3,42 @@ import PropTypes from "prop-types";
 import ReactTooltip from "react-tooltip";
 import { strings } from "../../../languages/localizedStrings";
 import GoLive from "../../../../static/images/icons/icon-go-live.png";
+import { GoLiveTour, MediaPermissionsTour, EnableMediaTour } from "../../tours";
+import { ACTIONS, EVENTS, LIFECYCLE, STATUS } from 'react-joyride';
 
 class GoLiveButton extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      showMediaPermissionsTour: false,
+      showEnableMediaTour: false,
+    };
+    this.checkMedia = this.checkMedia.bind(this);
+    this.handleMediaTourCallback = this.handleMediaTourCallback.bind(this);
+    this.goLive = this.props.goLive;
+  }
+
+  checkMedia() {
+    const { isMuted, videoEnabled } = this.props;
+    if (isMuted || !videoEnabled) {
+      this.setState({showEnableMediaTour: true});
+      return;
+    }
+    navigator.mediaDevices.getUserMedia({ audio: true, video: true })
+    .then((stream) => {
+      this.goLive();
+    })
+    .catch((err) => {
+      this.setState({showMediaPermissionsTour: true})
+    });
+  }
+
+  handleMediaTourCallback(data) {
+    const { action, index, status, type } = data;
+    if (action == ACTIONS.CLOSE) {
+      this.setState({showMediaPermissionsTour: false})
+      this.setState({showEnableMediaTour: false})
+    }
   }
 
   render() {
@@ -14,7 +46,7 @@ class GoLiveButton extends Component {
     return (
       <li data-tip data-for="go-live">
         <a
-          onClick={() => goLive()}
+          onClick={this.checkMedia}
           className="go-live-btn"
           title={strings.go_live}
         >
@@ -36,6 +68,19 @@ class GoLiveButton extends Component {
           >
             {strings.go_live}
           </ReactTooltip>
+        )}
+        <GoLiveTour/>
+        {this.state.showMediaPermissionsTour && (
+          <MediaPermissionsTour
+            goLive={goLive}
+            callback={this.handleMediaTourCallback}
+          />
+        )}
+        {this.state.showEnableMediaTour && (
+          <EnableMediaTour
+            goLive={goLive}
+            callback={this.handleMediaTourCallback}
+          />
         )}
       </li>
     );
