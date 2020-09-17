@@ -13,6 +13,7 @@ import { Actions as ParticipantWaitingActions } from "./ParticipantWaitingAction
 import { Actions as OnBoardingMessageActions } from "./OnBoardingMessageActions";
 import { Actions as OnBoardingMessageWithActionActions } from "./OnBoardingMessageWithActionActions";
 import { Actions as TimerActions } from "./TimerActions";
+import { Actions as RecordingTimerActions } from "./RecordingTimerActions";
 import { strings } from "../languages/localizedStrings.js";
 import { getOrganizedPosition, getRelativePosition } from "./../libs/position";
 import {
@@ -975,6 +976,7 @@ export class Actions {
               )
             );
             dispatch(ControlsActions.toggleRecording());
+            dispatch(RecordingTimerActions.startRecordingTime());
           })
           .catch((err) => {
             this._throwErrorModal(err);
@@ -990,6 +992,7 @@ export class Actions {
               )
             );
             dispatch(ControlsActions.toggleRecording());
+            dispatch(RecordingTimerActions.stopRecordingTime());
           })
           .catch((err) => {
             this._throwErrorModal(err);

@@ -75,7 +75,7 @@ class ActionsButtons extends Component {
     return (
       <div>
         <ul className="controls-left">
-          <span class='media-buttons'>
+          <span className='media-buttons'>
           {!isWidgetFullScreenOn &&
             !forceFullscreen &&
             (!isWebinar || (isWebinar && isAdmin)) &&

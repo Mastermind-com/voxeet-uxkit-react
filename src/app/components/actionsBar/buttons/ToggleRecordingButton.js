@@ -4,6 +4,14 @@ import ReactTooltip from "react-tooltip";
 import { strings } from "../../../languages/localizedStrings";
 import RecordingOn from "../../../../static/images/icons/btn-record-recording.svg";
 import RecordingOff from "../../../../static/images/icons/btn-record-live.svg";
+import { connect } from "@voxeet/react-redux-5.1.1";
+import { sprintf } from "sprintf-js";
+
+@connect(state => {
+  return {
+    recordingTimerStore: state.voxeet.recordingTimer
+  };
+})
 
 class ToggleRecordingButton extends Component {
   constructor(props) {
@@ -30,9 +38,9 @@ class ToggleRecordingButton extends Component {
       tooltipPlace,
       isBottomBar,
       recordingLocked,
-      recordingTime
     } = this.props;
     const { hover, isMobile } = this.state;
+    const { recording_time } = this.props.recordingTimerStore;
     return (
       <li
         className={isRecording || recordingLocked ? "active" : ""}
@@ -60,7 +68,7 @@ class ToggleRecordingButton extends Component {
           {isBottomBar && (
             <>
               <div>
-                <span>{this.statusMessage()}</span>
+                <span>{isRecording ? this.formatTime(recording_time) : strings.record}</span>
               </div>
             </>
           )}
@@ -77,6 +85,13 @@ class ToggleRecordingButton extends Component {
         )}
       </li>
     );
+  }
+
+  formatTime(time) {
+    const hours = Math.floor(time / 3600);
+    const minutes = Math.floor((time % 3600) / 60);
+    const seconds = time % 60;
+    return sprintf('%02u:%02u:%02u', hours, minutes, seconds);
   }
 }
 

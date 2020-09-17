@@ -47,7 +47,8 @@
     "react-tooltip": "3.9.2",
     "redux": "4.0.4",
     "redux-promise": "0.6.0",
-    "redux-thunk": "2.3.0"
+    "redux-thunk": "2.3.0",
+    "sprintf-js": "^1.1.2"
   },
   "devDependencies": {
     "@babel/core": "^7.3.4",
