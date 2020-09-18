@@ -512,6 +512,24 @@ Dropdown
 .clearfix:after {
   clear: both;
 }
+.react-joyride__tooltip {
+  font-family: DINNextLTPro-Regular;
+}
+.react-joyride__tooltip a {
+  text-decoration: none;
+  font-weight: bold;
+  color: black;
+}
+.react-joyride__tooltip button.acknowledge {
+  border: 0;
+  border-radius: 4px;
+  background-color: #3e44fe;
+  color: white;
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 1;
+  padding: 8px;
+}
 .vxt-conference-preconfig {
   overflow: scroll !important;
 }

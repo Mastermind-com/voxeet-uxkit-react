@@ -232,6 +232,8 @@ The Widget is translate in english and french. The language will be automaticall
 | `actionsButtons`         | React Component | ActionsButtons - All buttons                                                                                                                   | A react component to customize the actions buttons                                                                                                                                                           |
 | `handleOnLeave`          | Function        |                                                                                                                                                | Function call on leave conference                                                                                                                                                                            |
 | `handleOnConnect`        | Function        |                                                                                                                                                | Function call when the current user is connected to the conference                                                                                                                                           |
+| `isLive`  | Boolean | false | Indicates if the stream is accessible to members
+| `goLiveCallBack` | String | null | Name of the callback function to call when 'Go Live' button is pressed. The function must live on the `window` object.
 
 For more documentation on userInfo and constraints you can look at [Voxeet Sdk](https://www.npmjs.com/package/@voxeet/voxeet-web-sdk)
 
@@ -328,6 +330,19 @@ class ActionsButtons extends Component {
             )}
         </ul>
         <ul className="controls-center">
+          {!isWidgetFullScreenOn &&
+            !forceFullscreen &&
+            (!isWebinar || (isWebinar && isAdmin)) &&
+            displayActions.indexOf("recording") > -1 &&
+            !isDemo && !isLive && (
+              <GoLiveButton
+                goLive={goLive}
+                videoEnabled={videoEnabled}
+                isMuted={isMuted}
+                isBottomBar={isBottomBar}
+                tooltipPlace={isBottomBar ? "top" : "right"}
+              />
+            )}
           {!isWidgetFullScreenOn &&
             !forceFullscreen &&
             (!isWebinar || (isWebinar && isAdmin)) &&

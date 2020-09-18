@@ -2,6 +2,7 @@ import { combineReducers } from "redux";
 import ErrorReducer from "./ErrorReducer";
 import ConferenceReducer from "./ConferenceReducer";
 import TimerReducer from "./TimerReducer";
+import RecordingTimerReducer from "./RecordingTimerReducer";
 import ChatReducer from "./ChatReducer";
 import ControlsReducer from "./ControlsReducer";
 import InputManagerReducer from "./InputManagerReducer";
@@ -20,6 +21,7 @@ const reducers = combineReducers({
   onBoardingMessage: OnBoardingMessageReducer,
   onBoardingMessageWithAction: OnBoardingMessageWithActionReducer,
   timer: TimerReducer,
+  recordingTimer: RecordingTimerReducer,
   controls: ControlsReducer,
   participants: ParticipantsReducer,
   chat: ChatReducer,

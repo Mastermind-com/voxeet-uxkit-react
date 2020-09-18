@@ -12,7 +12,8 @@ import {
   ToggleSettingsButton,
   TogglePSTN,
   ToggleAttendeesListButton,
-  ToggleAttendeesChatButton
+  ToggleAttendeesChatButton,
+  GoLiveButton,
 } from "./buttons";
 
 class ActionsButtons extends Component {
@@ -26,6 +27,7 @@ class ActionsButtons extends Component {
       forceFullscreen,
       isMuted,
       isRecording,
+      isLive,
       isWidgetFullScreenOn,
       toggleVideoPresentation,
       videoEnabled,
@@ -38,6 +40,7 @@ class ActionsButtons extends Component {
       screenShareEnabled,
       filePresentationEnabled,
       toggleRecording,
+      goLive,
       toggleVideo,
       toggleScreenShare,
       attendeesSettingsOpened,
@@ -72,6 +75,7 @@ class ActionsButtons extends Component {
     return (
       <div>
         <ul className="controls-left">
+          <span className='media-buttons'>
           {!isWidgetFullScreenOn &&
             !forceFullscreen &&
             (!isWebinar || (isWebinar && isAdmin)) &&
@@ -96,13 +100,27 @@ class ActionsButtons extends Component {
                 tooltipPlace={isBottomBar ? "top" : "right"}
               />
             )}
+          </span>
         </ul>
         <ul className="controls-center">
           {!isWidgetFullScreenOn &&
             !forceFullscreen &&
             (!isWebinar || (isWebinar && isAdmin)) &&
             displayActions.indexOf("recording") > -1 &&
-            !isDemo && (
+            !isDemo && !isLive && (
+              <GoLiveButton
+                goLive={goLive}
+                videoEnabled={videoEnabled}
+                isMuted={isMuted}
+                isBottomBar={isBottomBar}
+                tooltipPlace={isBottomBar ? "top" : "right"}
+              />
+            )}
+          {!isWidgetFullScreenOn &&
+            !forceFullscreen &&
+            (!isWebinar || (isWebinar && isAdmin)) &&
+            displayActions.indexOf("recording") > -1 &&
+            !isDemo && isLive && (
               <ToggleRecordingButton
                 isRecording={isRecording}
                 recordingLocked={recordingLocked}
@@ -206,10 +224,12 @@ ActionsButtons.propTypes = {
   recordingLocked: PropTypes.bool.isRequired,
   audio3DEnabled: PropTypes.bool.isRequired,
   isRecording: PropTypes.bool.isRequired,
+  isLive: PropTypes.bool.isRequired,
   isWidgetFullScreenOn: PropTypes.bool.isRequired,
   toggleMicrophone: PropTypes.func.isRequired,
   leave: PropTypes.func.isRequired,
   toggleRecording: PropTypes.func.isRequired,
+  goLive: PropTypes.func.isRequired,
   toggleVideo: PropTypes.func.isRequired,
   toggleScreenShare: PropTypes.func.isRequired,
   toggleVideoPresentation: PropTypes.func.isRequired,

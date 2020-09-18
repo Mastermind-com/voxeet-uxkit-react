@@ -17,6 +17,7 @@ export const Types = {
   SET_CHROME_EXTENSION_ID: "SET_CHROME_EXTENSION_ID",
   SET_VIDEO_RATIO: "SET_VIDEO_RATIO",
   TOGGLE_RECORDING: "TOGGLE_RECORDING",
+  GO_LIVE: "GO_LIVE",
   TOGGLE_MODAL_WIDGET: "TOGGLE_MODAL_WIDGET",
   SAVE_CONSTRAINTS: "SAVE_CONSTRAINTS",
   ADMIN_ACTIVED: "ADMIN_ACTIVED",
@@ -228,6 +229,12 @@ export class Actions {
   static unlockRecording() {
     return {
       type: Types.UNLOCK_RECORDING
+    };
+  }
+
+  static goLive() {
+    return {
+      type: Types.GO_LIVE
     };
   }
 

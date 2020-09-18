@@ -11,6 +11,7 @@ try {
 }
 
 module.exports = {
+  watch: true,
   entry: [
     "react-hot-loader/patch",
     "webpack/hot/only-dev-server", // "only" prevents reload on syntax errors
@@ -31,13 +32,13 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /.jsx?$/,
+        test: /\.jsx?$/,
         loaders: ["babel-loader"],
         exclude: /node_modules/,
         include: path.resolve(__dirname),
       },
       {
-        test: /.less$/,
+        test: /\.(less|css)$/,
         loader: "style-loader!css-loader!less-loader",
       },
       {

@@ -28,13 +28,13 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /.jsx?$/,
+        test: /\.jsx?$/,
         loaders: ["babel-loader"],
         exclude: /node_modules/,
         include: path.resolve(__dirname),
       },
       {
-        test: /.less$/,
+        test: /\.(less|css)$/,
         use: ExtractTextPlugin.extract({
           fallback: "style-loader",
           use: [{ loader: "css-loader" }, { loader: "less-loader" }],
