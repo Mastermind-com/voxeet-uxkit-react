@@ -121,8 +121,10 @@ class ConferenceRoomContainer extends Component {
 
   goLive() {
     const { isLive } = this.props.controlsStore;
+    const { goLiveCallback } = this.props;
     this.props.dispatch(ConferenceActions.goLive());
-    this.props.goLiveCallback();
+    if (goLiveCallback)
+      window[goLiveCallback]();
   }
 
   toggleVideo() {
@@ -423,7 +425,7 @@ ConferenceRoomContainer.propTypes = {
   attendeesList: PropTypes.func,
   attendeesChat: PropTypes.func,
   attendeesWaiting: PropTypes.func,
-  goLiveCallback: PropTypes.func,
+  goLiveCallback: PropTypes.string,
 };
 
 export default ConferenceRoomContainer;

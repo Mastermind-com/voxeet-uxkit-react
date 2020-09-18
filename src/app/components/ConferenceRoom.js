@@ -470,7 +470,7 @@ ConferenceRoom.propTypes = {
   customLocalizedStrings: PropTypes.object,
   handleOnConnect: PropTypes.func,
   attendeesWaiting: PropTypes.func,
-  goLiveCallback: PropTypes.func,
+  goLiveCallback: PropTypes.string,
 };
 
 ConferenceRoom.defaultProps = {
@@ -522,7 +522,7 @@ ConferenceRoom.defaultProps = {
   attendeesChat: AttendeesChat,
   loadingScreen: LoadingScreen,
   attendeesWaiting: AttendeesWaiting,
-  goLiveCallback: () => {},
+  goLiveCallback: null,
 };
 
 export default ConferenceRoom;
