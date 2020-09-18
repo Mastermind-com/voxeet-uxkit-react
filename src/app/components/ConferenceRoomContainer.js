@@ -225,7 +225,6 @@ class ConferenceRoomContainer extends Component {
       isDemo,
       conferencePincode,
       conferenceId,
-      goLiveCallback,
     } = this.props;
     const { errorMessage, isError } = this.props.errorStore;
     const { isModalExternalLiveOpen } = this.state;
