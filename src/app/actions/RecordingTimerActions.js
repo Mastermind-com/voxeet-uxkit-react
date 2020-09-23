@@ -1,6 +1,4 @@
 export const Types = {
-  START_RECORDING_TIMER: "START_RECORDING_TIMER",
-  STOP_RECORDING_TIMER: "STOP_RECORDING_TIMER",
   INCREMENT_RECORDING_TIMER: "INCREMENT_RECORDING_TIMER"
 };
 
@@ -16,17 +14,6 @@ export class Actions {
   }
 
   static stopRecordingTime() {
-    return dispatch => {
-      clearInterval(this._interval);
-      return dispatch({
-        type: Types.INCREMENT_RECORDING_TIMER,
-      });
-    };
-  }
-
-  static incrementRecordingTime() {
-    return {
-      type: Types.INCREMENT_RECORDING_TIMER
-    };
+    clearInterval(this._interval);
   }
 }

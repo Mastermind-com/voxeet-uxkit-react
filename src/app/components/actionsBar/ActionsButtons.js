@@ -105,7 +105,7 @@ class ActionsButtons extends Component {
         <ul className="controls-center">
           {!isWidgetFullScreenOn &&
             !forceFullscreen &&
-            (!isWebinar || (isWebinar && isAdmin)) &&
+            isAdmin &&
             displayActions.indexOf("recording") > -1 &&
             !isDemo && !isLive && (
               <GoLiveButton
