@@ -63,14 +63,8 @@ class ActionsButtons extends Component {
       currentUser,
       isFilePresentation,
       isScreenshare,
-      isDemo
+      isDemo,
     } = this.props;
-    let nbParticipants = 0;
-    if (participants && participants.length) {
-      nbParticipants = participants.filter(p => p.isConnected).length;
-    }
-    if ((!isWebinar && !currentUser.isListener) || (isWebinar && isAdmin))
-      nbParticipants += 1;
 
     return (
       <div>
@@ -120,11 +114,11 @@ class ActionsButtons extends Component {
             !forceFullscreen &&
             (!isWebinar || (isWebinar && isAdmin)) &&
             displayActions.indexOf("recording") > -1 &&
-            !isDemo && isLive && (
+            !isDemo && (
               <ToggleRecordingButton
                 isRecording={isRecording}
                 recordingLocked={recordingLocked}
-                toggle={toggleRecording}
+                toggle={(isAdmin && isLive && toggleRecording) || (() => {})}
                 isBottomBar={isBottomBar}
                 tooltipPlace={isBottomBar ? "top" : "right"}
               />
@@ -161,7 +155,8 @@ class ActionsButtons extends Component {
           {!isWidgetFullScreenOn &&
             !forceFullscreen &&
             (!isWebinar || (isWebinar && isAdmin)) &&
-            displayActions.indexOf("pstn") > -1 && conferencePincode.length > 0 &&
+            displayActions.indexOf("pstn") > -1 &&
+            conferencePincode.length > 0 &&
             !isDemo && (
               <TogglePSTN
                 conferencePincode={conferencePincode}
@@ -173,7 +168,7 @@ class ActionsButtons extends Component {
             !forceFullscreen &&
             (!isWebinar || (isWebinar && isAdmin)) &&
             !bowser.msie &&
-            !currentUser.isListener && (
+            (!currentUser.isListener || bowser.chrome) && (
               <ToggleSettingsButton
                 attendeesSettingsOpened={attendeesSettingsOpened}
                 toggle={toggleAttendeesSettings}
@@ -183,11 +178,13 @@ class ActionsButtons extends Component {
             )}
           {displayActions.indexOf("attendees") > -1 && (
             <ToggleAttendeesListButton
-              nbParticipants={nbParticipants}
               tooltipPlace={isBottomBar ? "top" : "right"}
               toggle={toggleAttendeesList}
               isBottomBar={isBottomBar}
               isOpen={attendeesListOpened}
+              isWebinar={isWebinar}
+              isAdmin={isAdmin}
+              currentUser={currentUser}
             />
           )}
           {displayActions.indexOf("chat") > -1 && (
@@ -242,12 +239,12 @@ ActionsButtons.propTypes = {
   toggleAttendeesChat: PropTypes.func.isRequired,
   attendeesChatOpened: PropTypes.bool.isRequired,
   toggleAttendeesSettings: PropTypes.func.isRequired,
-  attendeesSettingsOpened: PropTypes.bool.isRequired
+  attendeesSettingsOpened: PropTypes.bool.isRequired,
 };
 
 ActionsButtons.defaultProps = {
   isBottomBar: false,
-  forceFullscreen: false
+  forceFullscreen: false,
 };
 
 export default ActionsButtons;
