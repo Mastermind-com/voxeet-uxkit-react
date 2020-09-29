@@ -21,6 +21,7 @@ import ModalClose from "./attendees/modal/ModalClose";
 import Modal from "./attendees/modal/Modal";
 
 import BottomBar from "./actionsBar/bottomBar/BottomBar";
+import { RefreshWarningTour } from "./tours";
 
 @connect(store => {
   return {
@@ -227,6 +228,7 @@ class ConferenceRoomContainer extends Component {
       isDemo,
       conferencePincode,
       conferenceId,
+      showRefreshWarning,
     } = this.props;
     const { errorMessage, isError } = this.props.errorStore;
     const { isModalExternalLiveOpen } = this.state;
@@ -401,6 +403,10 @@ class ConferenceRoomContainer extends Component {
             microphoneMuted={isMuted}
             videoEnabled={videoEnabled}
             userStream={userStream}
+          />
+        )}
+        {showRefreshWarning && (
+          <RefreshWarningTour
           />
         )}
       </div>

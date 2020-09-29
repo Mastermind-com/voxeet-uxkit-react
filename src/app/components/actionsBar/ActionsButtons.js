@@ -114,11 +114,11 @@ class ActionsButtons extends Component {
             !forceFullscreen &&
             (!isWebinar || (isWebinar && isAdmin)) &&
             displayActions.indexOf("recording") > -1 &&
-            !isDemo && isLive && (
+            !isDemo && (
               <ToggleRecordingButton
                 isRecording={isRecording}
                 recordingLocked={recordingLocked}
-                toggle={toggleRecording}
+                toggle={(isAdmin && isLive && toggleRecording) || (() => {})}
                 isBottomBar={isBottomBar}
                 tooltipPlace={isBottomBar ? "top" : "right"}
               />

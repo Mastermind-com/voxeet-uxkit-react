@@ -54,7 +54,7 @@ class GoLiveButton extends Component {
           {isBottomBar && (
             <>
               <div>
-                <span>{strings.go_live}</span>
+                <span>Allow Members</span>
               </div>
             </>
           )}

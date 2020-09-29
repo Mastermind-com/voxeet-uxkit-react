@@ -98,13 +98,10 @@ class AttendeesList extends Component {
     let userNotYetInvitedWithoutFilter = null;
     let userNotYetInvitedWithFilter = null;
     const participantsListener = this.props.participantWaiting.participants.filter(
-      (p) => p.stream == null && p.isConnected
+      (p) => p.stream == null && p.isConnected && p.info?.name?.toLowerCase != 'mixer'
     );
     const participantsInvited = this.props.participantWaiting.participants.filter(
       (p) => p.status == "Reserved"
-    );
-    const participantsInactive = this.props.participantWaiting.participants.filter(
-      (p) => p.status == "Inactive"
     );
     const participantsLeft = this.props.participantWaiting.participants.filter(
       (p) => p.status == "Left"
@@ -310,8 +307,7 @@ class AttendeesList extends Component {
                   </ul>
                 </div>
               )}
-              {(participantsInactive.length > 0 ||
-                participantsListener.length > 0 ||
+              {(participantsListener.length > 0 ||
                 currentUser.isListener) && (
                   <div>
                     <div className="title-section">
@@ -319,11 +315,9 @@ class AttendeesList extends Component {
                       <span>
                         (
                     {currentUser.isListener
-                          ? participantsInactive.length +
-                          participantsListener.length +
+                          ? participantsListener.length +
                           1
-                          : participantsInactive.length +
-                          participantsListener.length}
+                          : participantsListener.length}
                         )
                   </span>
                     </div>
@@ -342,21 +336,6 @@ class AttendeesList extends Component {
                         </li>
                       )}
                       {participantsListener.map((participant, i) => {
-                        return (
-                          <li key={i}>
-                            <span className="participant-details">
-                              <img
-                                src={participant.avatarUrl || userPlaceholder}
-                                className="participant-avatar"
-                              />
-                              <span className="participant-username">
-                                {participant.name}
-                              </span>
-                            </span>
-                          </li>
-                        );
-                      })}
-                      {participantsInactive.map((participant, i) => {
                         return (
                           <li key={i}>
                             <span className="participant-details">

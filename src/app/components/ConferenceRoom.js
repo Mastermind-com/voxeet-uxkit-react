@@ -275,7 +275,7 @@ class ConferenceRoom extends Component {
     // Print UXKit Version
     console.log("UXKit Version: " + __VERSION__);
     let props = this.props;
-    const { isWebinar, isAdmin, isListener, preConfig } = this.props;
+    const { isWebinar, isAdmin, isListener, preConfig, isLive } = this.props;
     let doPreConfig =
         !isListener &&
         !bowser.msie &&
@@ -292,6 +292,9 @@ class ConferenceRoom extends Component {
         this.startConferenceWithParams();
       }
     })
+    if (isLive) {
+      props.dispatch(ControlsActions.goLive());
+    }
   }
 
   /**
@@ -427,6 +430,7 @@ class ConferenceRoom extends Component {
       isLive,
       logo,
       goLiveCallback,
+      showRefreshWarning,
     } = this.props;
     const {
       screenShareEnabled,
@@ -537,6 +541,7 @@ class ConferenceRoom extends Component {
           conferenceId={conferenceId}
           attendeesWaiting={attendeesWaiting}
           goLiveCallback={goLiveCallback}
+          showRefreshWarning={showRefreshWarning}
         />
       );
     }
@@ -592,6 +597,7 @@ ConferenceRoom.propTypes = {
   handleOnConnect: PropTypes.func,
   attendeesWaiting: PropTypes.func,
   goLiveCallback: PropTypes.string,
+  showRefreshWarning: PropTypes.bool,
 };
 
 ConferenceRoom.defaultProps = {
@@ -643,6 +649,7 @@ ConferenceRoom.defaultProps = {
   loadingScreen: LoadingScreen,
   attendeesWaiting: AttendeesWaiting,
   goLiveCallback: null,
+  showRefreshWarning: false,
 };
 
 export default ConferenceRoom;

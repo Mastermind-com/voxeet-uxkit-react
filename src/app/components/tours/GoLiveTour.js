@@ -4,7 +4,7 @@ import Joyride from 'react-joyride';
 const steps = [
   {
     target: '.go-live-btn',
-    content: "Press the 'Go Live' button to allow members to join this session",
+    content: "Press the 'Allow Members' button to allow members to join this session",
     disableBeacon: true,
   }
 ];
