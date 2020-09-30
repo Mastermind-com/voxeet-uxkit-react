@@ -86,11 +86,6 @@ const ConferenceReducer = (state = defaultState, action) => {
         initialized: true,
         userId: action.payload.userId
       };
-    case Types.UPDATE_PARTICIPANTS:
-      return {
-        ...state,
-        updatedParticipants: action.payload.participants
-      };
     default:
       return state;
   }
